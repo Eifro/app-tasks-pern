@@ -2,10 +2,13 @@
 const { Pool } = require('pg')
 
 // datos de conexión
-new Pool ({
+// devuelve un objeto con el que podemos hacer consultas
+const db = new Pool ({
     user: 'postgres',
     password: 'qazwsx1999',
     host: 'localhost',
     port: 5432,
     database: 'tasks_db'
 })
+
+module.exports = db

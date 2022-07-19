@@ -1,9 +1,13 @@
 const { Router } = require('express')
+const db = require('../db')
 
 const router = Router()
 
-router.get('/tasks', (req, res) => {
-    res.send('get tasks list')
+router.get('/tasks', async (req, res) => {
+    // consulta a db son asíncronas - async / await
+    const response = await db.query('SELECT NOW()')
+    console.log(response)
+    res.json(response.rows[0].now)
 })
 
 router.get('/tasks/5', (req, res) => {
