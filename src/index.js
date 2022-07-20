@@ -13,6 +13,9 @@ const app = express()
 
 app.use(morgan('dev'))
 
+// usa json para los post y get
+app.use(express.json())
+
 app.use(tasksRoutes)
 
 app.listen(3000)
