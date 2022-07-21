@@ -5,7 +5,7 @@ const { Pool } = require('pg')
 // devuelve un objeto con el que podemos hacer consultas
 const db = new Pool ({
     user: 'postgres',
-    password: 'qazwsx1999',
+    password: 'migue19',
     host: 'localhost',
     port: 5432,
     database: 'tasks_db'
