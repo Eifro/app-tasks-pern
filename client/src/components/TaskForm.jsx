@@ -1,18 +1,19 @@
-import { Button, Card, CardContent, Grid, TextField, Typography } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { Button, Card, CardContent, CircularProgress, Grid, TextField, Typography } from "@mui/material";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 export default function TaskForm() {
   const [input, setInput] = useState({
     title: '',
     description: ''
   })
+  const [loading, setLoading] = useState(false)
   const params = useParams();
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(true)
     const response = await fetch('http://localhost:3001/tasks', {
       method: 'POST',
       body: JSON.stringify(input),
@@ -21,6 +22,7 @@ export default function TaskForm() {
       }
     })
     const data = await response.json()
+    setLoading(false)
     navigate('/')
     console.log(data)
   }
@@ -64,8 +66,8 @@ export default function TaskForm() {
                 name='description'
                 onChange={handleChange}
               />
-              <Button variant="contained" color="success" type='submit'>
-                GUARDAR
+              <Button variant="contained" color="success" type='submit' disabled={!input.title || !input.description}>
+                {loading ? <CircularProgress size={24} color='inherit' /> : 'GUARDAR'}
               </Button>
             </form>
           </CardContent>
